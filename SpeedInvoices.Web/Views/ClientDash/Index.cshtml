@@ -1,0 +1,95 @@
+﻿@model SpeedInvoices.Web.Models.IndexClientModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row column1">
+    <div class="col-md-6 col-lg-3">
+        <div class="full counter_section margin_bottom_30">
+            <div class="couter_icon">
+                <div>
+                    <i class="bi bi-receipt-cutoff blue1_color"></i>
+                </div>
+            </div>
+            <div class="counter_no">
+                <div>
+                    <p class="total_no">@Model.NombreFNS.ToString()</p>
+                    <p class="head_couter">Facture non soldée</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="full counter_section margin_bottom_30">
+            <div class="couter_icon">
+                <div>
+                    <i class="bi bi-receipt-cutoff blue2_color"></i>
+                </div>
+            </div>
+            <div class="counter_no">
+                <div>
+                    <p class="total_no">@Model.NombreFS.ToString()</p>
+                    <p class="head_couter">Facture soldée</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="full price_table padding_infor_info">
+        <div class="row">
+            <!-- user profile section -->
+            <!-- profile image -->
+            <div class="col-lg-12">
+                <div class="full dis_flex center_text">
+                    <div class="profile_contant">
+                        <div class="contact_inner">
+                            <h3>@Model.NomClient.ToString() @Model.PrenomClient.ToString()</h3>
+                            <p><strong>Adresse: </strong>@Model.AdresseClient.ToString()</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-envelope-o"></i> : @Model.Email.ToString()</li>
+                                <li><i class="fa fa-phone"></i> : @Model.TelephoneClient.ToString()</li>
+                            </ul>
+                        </div>
+                        <div class="user_progress_bar">
+                            <div class="progress_bar">
+                                <!-- Skill Bars -->
+
+                                <span class="skill">Factures non soldées </span>
+                                <br />
+                                <span class="info_valume">@Model.Pfns.ToString()%</span>
+                                <div class="progress skill-bar">
+                                    <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="@Model.Pfns.ToString()" aria-valuemin="0" aria-valuemax="50" style="width: @Model.Pfns.ToString()%;">
+                                    </div>
+                                </div>
+
+                                <span class="skill">Facture soldées </span>
+                                <br />
+                                <span class="info_valume">@Model.Pfs.ToString()%</span>
+                                <div class="progress skill-bar">
+                                    <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" aria-valuenow="@Model.Pfs.ToString()" aria-valuemin="0" aria-valuemax="50" style="width: @Model.Pfs.ToString();">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="footer">
+            <p>Copyright © 2021. All rights reserved.</p>
+        </div>
+    </div>
+</div>

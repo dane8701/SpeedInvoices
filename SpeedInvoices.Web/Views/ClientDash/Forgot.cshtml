@@ -1,0 +1,91 @@
+﻿@model SpeedInvoices.Web.Models.ClientModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Speed Invoices</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- site icon -->
+    <link rel="icon" href="@Url.Content("~/Content/images/fevicon.png")" type="image/png" />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" />
+    <!-- site css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/style1.css")" />
+    <!-- responsive css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/responsive.css")" />
+    <!-- color css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/colors.css")" />
+    <!-- select bootstrap -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-select.css")" />
+    <!-- scrollbar css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/perfect-scrollbar.css")" />
+    <!-- custom css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/custom.css")" />
+    <!-- calendar file css -->
+    <link rel="stylesheet" href="@Url.Content("~/Scripts/semantic.min.css")" />
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="inner_page login">
+    <div class="full_container">
+        <div class="container">
+            <div class="center verticle_center full_height">
+                <div class="login_section">
+                    <div class="logo_login">
+                        <div class="center">
+                            <img width="210" src="@Url.Content("~/Content/images/logo/logo.png")" alt="#" />
+                        </div>
+                    </div>
+                    <div class="login_form">
+                        @using (Html.BeginForm("Forgotten", "ClientDash", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <fieldset>
+                                <div class="field">
+                                    <label class="label_field">Addresse e-mail</label>
+                                    @Html.TextBoxFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @if(Model.Message != null)
+                                    {
+                                        <label class="text-danger">@Model.Message</label>
+                                    }
+                                </div>
+                                <div class="field margin_0">
+                                    <label class="label_field hidden">label cacher</label>
+                                    <input type="submit" class="main_bt" value="Valider" />
+                                    <label class="label_field hidden">label label</label>
+                                    @Html.ActionLink("Retour ?", "Login", "ClientDash", new { @class = "text-primary" })
+                                </div>
+                            </fieldset>
+                        }
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/popper.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <!-- wow animation -->
+    <script src="@Url.Content("~/Scripts/animate.js")"></script>
+    <!-- select country -->
+    <script src="@Url.Content("~/Scripts/bootstrap-select.js")"></script>
+    <!-- nice scrollbar -->
+    <script src="@Url.Content("~/Scripts/perfect-scrollbar.min.js")"></script>
+    <script>
+        var ps = new PerfectScrollbar('#sidebar');
+    </script>
+    <!-- custom js -->
+    <script src="@Url.Content("~/Scripts/custom.js")"></script>
+</body>
+</html>

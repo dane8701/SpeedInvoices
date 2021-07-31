@@ -1,0 +1,169 @@
+﻿@model SpeedInvoices.Web.Models.FactureModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Facture</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/template.css")">
+</head>
+<body style="        background-image: url(http://localhost:81/SpeedInvoices.Service/Uploads/@Model.Structure.LogoStructure.ToString());
+        background-repeat: no-repeat;
+        background-position: 50% 0%;
+    ">
+    <div id="container" style="width:950px;">
+        <section id="memo">
+            <div class="company-info">
+                <span class="ibcl_company_name">@Model.Structure.NomStructure</span>
+
+                <div class="separator less"></div>
+
+                <span class="ibcl_company_address">@Model.Structure.AdresseStructure</span>
+                <br>
+                <span class="ibcl_company_email_web">@Model.Structure.Email</span>
+                <br />
+                <span class="ibcl_company_phone_fax">+237 @Model.Structure.TelephoneStructure</span>
+            </div>
+        </section>
+
+        <section id="invoice-title-number">
+
+            <span id="title" class="ibcl_invoice_title">FACTURE</span>
+            <div class="separator"></div>
+            <span id="number" class="ibcl_invoice_number">@Model.ReferenceFacture</span>
+
+        </section>
+
+        <div class="clearfix"></div>
+
+        <section id="invoice-info">
+            <div>
+                <span class="ibcl_issue_date_label">Date de délivrance: </span>
+                <span data-ibcl-id="currency_label" class="ibcl_currency_label">Monnaie: </span>
+            </div>
+
+            <div>
+                <span class="ibcl_issue_date">@Model.DateCreationFacture</span>
+                <span data-ibcl-id="currency" class="ibcl_currency">FCFA</span>
+            </div>
+        </section>
+
+        <section id="client-info">
+            <span class="ibcl_bill_to_label">Facture pour :</span>
+            <div>
+                <span class="client-name ibcl_client_name">@Model.Client.NomClient @Model.Client.PrenomClient</span>
+            </div>
+
+            <div>
+                <span class="ibcl_client_address">@Model.Client.AdresseClient</span>
+            </div>
+
+            <div>
+                <span class="ibcl_client_phone_fax">+237 @Model.Client.TelephoneClient</span>
+            </div>
+
+            <div>
+                <span class="ibcl_client_email">@Model.Client.Email</span>
+            </div>
+        </section>
+
+        <div class="clearfix"></div>
+
+        <section id="items">
+
+            <table cellpadding="0" cellspacing="0">
+
+                <tbody>
+                    <tr>
+                        <th class="ibcl_item_row_number_label"></th> <!-- Dummy cell for the row number and row commands -->
+                        <th class="ibcl_item_description_label">Article</th>
+                        <th class="ibcl_item_quantity_label">Quantité</th>
+                        <th class="ibcl_item_price_label">Prix</th>
+                        <th class="ibcl_item_line_total_label">Total</th>
+                    </tr>
+                    @{ int position = 1;}
+                    @foreach (var item in Model.Produit_Facture)
+                    {
+                        <tr data-iterate="item" style="">
+                            @{
+                                <td data-ibcl-id="item_row_number" class="ibcl_item_row_number" data-tooltip="tooltip" data-placement="top" title="" style="position: relative;"><ib-span class="ib_row_commands" style="height:40px;"><ib-span class="ib_commands" style="display: none;"><ib-span class="ib_add" title="Insérer ligne"><i class="fa fa-plus"></i></ib-span><ib-span class="ib_delete" title="Supprimer ligne"><i class="fa fa-minus"></i></ib-span><ib-span class="ib_move" title="Tirer pour réorganiser" style="cursor: move;"><i class="fa fa-sort"></i></ib-span></ib-span></ib-span><ib-span data-row-number="item_row_number">@position</ib-span></td>
+                                <!-- Don't remove this column as it's needed for the row commands -->
+                                position = position + 1;
+                            }
+                            <td>
+                                <span data-ibcl-id="item_description_label" class="show-mobile ibcl_item_description_label" style="display: inline;">Article</span>
+                                <span class="ibcl_item_description">@item.Produit.IntituleProduit</span>
+                            </td>
+                            <td>
+                                <span data-ibcl-id="item_quantity_label" class="show-mobile ibcl_item_quantity_label" style="display: inline;">Quantité</span>
+                                <span class="ibcl_item_quantity">@item.QuantiteProduit</span>
+                            </td>
+                            <td>
+                                <span data-ibcl-id="item_price_label" class="show-mobile ibcl_item_price_label" style="display: inline;">Prix</span>
+                                <span class="ibcl_item_price add_currency_right">@item.Produit.PrixUnitaireProduit</span>
+                            </td>
+                            <td>
+                                <span data-ibcl-id="item_line_total_label" class="show-mobile ibcl_item_line_total_label" style="display: inline;">Total</span>
+                                @{
+                                    var total = item.QuantiteProduit * item.Produit.PrixUnitaireProduit;
+                                    <span class="ibcl_item_line_total add_currency_right">@total FCFA</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </section>
+
+        <section id="sums">
+
+            <table cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <th data-ibcl-id="amount_subtotal_label" class="ibcl_amount_subtotal_label" data-tooltip="tooltip" data-placement="top" title="Entrer l'étiquette du total partiel" contenteditable="true">Total partiel:</th>
+                        <td data-ibcl-id="amount_subtotal" class="ibcl_amount_subtotal" data-tooltip="tooltip" data-placement="top" title="">@Model.MontantHtFacture</td>
+                    </tr>
+
+                    <tr data-iterate="tax" style="display: table-row;">
+                        <th data-ibcl-id="tax_name" class="ibcl_tax_name">TVA:</th>
+                        @{
+                            var tva = (Model.MontantHtFacture * Model.Tva) / 100;
+                            <td data-ibcl-id="tax_value" class="ibcl_tax_value" data-tooltip="tooltip" data-placement="top" title="" data-ib-value="2">@tva FCFA</td>
+                        }
+                    </tr>
+                    <tr data-iterate="tax" style="display: table-row;">
+                        <th data-ibcl-id="tax_name" class="ibcl_tax_name">Remise:</th>
+                        @{
+                            var remise = (Model.MontantHtFacture * Model.RemiseFacture) / 100;
+                            <td data-ibcl-id="tax_value" class="ibcl_tax_value" data-tooltip="tooltip" data-placement="top" title="" data-ib-value="5">@remise FCFA</td>
+                        }
+                    </tr>
+
+                    <tr class="amount-total">
+                        <th data-ibcl-id="amount_total_label" class="ibcl_amount_total_label">Total:</th>
+                        <td data-ibcl-id="amount_total" class="ibcl_amount_total" data-tooltip="tooltip" data-placement="top" title="">@Model.MontantTtcFacture FCFA</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </section>
+
+        <div class="clearfix"></div>
+
+        <section id="terms">
+
+            <span class="hidden ibcl_terms_label" data-ibcl-id="terms_label">Termes &amp; Notes</span>
+            <div data-ibcl-id="terms" class="ibcl_terms">@Model.Client.NomClient, merci beaucoup. Nous estimons vraiment vos affaires.<br /> A bientôt.</div>
+
+        </section>
+
+        <div class="payment-info">
+            <div data-ibcl-id="payment_info1" class="ibcl_payment_info1">Détails sur le payement:</div>
+            <div data-ibcl-id="payment_info2" class="ibcl_payment_info2">@Model.ReferenceFacture</div>
+            <div data-ibcl-id="payment_info3" class="ibcl_payment_info3">@Model.DateCreationFacture.Date</div>
+        </div>
+    </div>
+</body>
+</html>

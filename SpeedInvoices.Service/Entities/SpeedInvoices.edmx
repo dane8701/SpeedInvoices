@@ -1,0 +1,636 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SpeedInvoicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrateur">
+          <Key>
+            <PropertyRef Name="IdAdministrateur" />
+          </Key>
+          <Property Name="IdAdministrateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomUtilisateur" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MotDePasse" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="IdCategorie" />
+          </Key>
+          <Property Name="IdCategorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomCategorie" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdStructure" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomClient" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PrenomClient" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="AdresseClient" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MotDePasse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TelephoneClient" Type="int" Nullable="false" />
+          <Property Name="IdStructure" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Etat">
+          <Key>
+            <PropertyRef Name="IdEtat" />
+          </Key>
+          <Property Name="IdEtat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomEtat" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DescriptionEtat" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="IdFacture" />
+          </Key>
+          <Property Name="IdFacture" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReferenceFacture" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateCreationFacture" Type="date" Nullable="false" />
+          <Property Name="RemiseFacture" Type="int" Nullable="false" />
+          <Property Name="Tva" Type="real" Nullable="false" />
+          <Property Name="MontantHtFacture" Type="real" Nullable="false" />
+          <Property Name="MontantTtcFacture" Type="real" Nullable="false" />
+          <Property Name="IdEtat" Type="int" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdStructure" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="IdProduit" />
+          </Key>
+          <Property Name="IdProduit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReferenceProduit" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IntituleProduit" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DescriptionProduit" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PrixUnitaireProduit" Type="int" Nullable="false" />
+          <Property Name="IdCategorie" Type="int" Nullable="false" />
+          <Property Name="IdStructure" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produit_Facture">
+          <Key>
+            <PropertyRef Name="IdProduit" />
+            <PropertyRef Name="IdFacture" />
+          </Key>
+          <Property Name="IdProduit" Type="int" Nullable="false" />
+          <Property Name="IdFacture" Type="int" Nullable="false" />
+          <Property Name="QuantiteProduit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Structure">
+          <Key>
+            <PropertyRef Name="IdStructure" />
+          </Key>
+          <Property Name="IdStructure" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomStructure" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="MotDePasse" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TelephoneStructure" Type="int" Nullable="false" />
+          <Property Name="AdresseStructure" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DateCreationStructure" Type="date" Nullable="false" />
+          <Property Name="LogoStructure" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <Association Name="FKCategorie448313">
+          <End Role="Structure" Type="Self.Structure" Multiplicity="1" />
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structure">
+              <PropertyRef Name="IdStructure" />
+            </Principal>
+            <Dependent Role="Categorie">
+              <PropertyRef Name="IdStructure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKClient242943">
+          <End Role="Structure" Type="Self.Structure" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structure">
+              <PropertyRef Name="IdStructure" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IdStructure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKFacture381456">
+          <End Role="Structure" Type="Self.Structure" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structure">
+              <PropertyRef Name="IdStructure" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="IdStructure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKFacture523783">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKFacture880416">
+          <End Role="Etat" Type="Self.Etat" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etat">
+              <PropertyRef Name="IdEtat" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="IdEtat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProduit_Fa13279">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="Produit_Facture" Type="Self.Produit_Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="IdProduit" />
+            </Principal>
+            <Dependent Role="Produit_Facture">
+              <PropertyRef Name="IdProduit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProduit_Fa746613">
+          <End Role="Facture" Type="Self.Facture" Multiplicity="1" />
+          <End Role="Produit_Facture" Type="Self.Produit_Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facture">
+              <PropertyRef Name="IdFacture" />
+            </Principal>
+            <Dependent Role="Produit_Facture">
+              <PropertyRef Name="IdFacture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProduit177806">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="IdCategorie" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="IdCategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProduit186235">
+          <End Role="Structure" Type="Self.Structure" Multiplicity="1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structure">
+              <PropertyRef Name="IdStructure" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="IdStructure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpeedInvoicesModelStoreContainer">
+          <EntitySet Name="Administrateur" EntityType="Self.Administrateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etat" EntityType="Self.Etat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produit_Facture" EntityType="Self.Produit_Facture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Structure" EntityType="Self.Structure" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FKCategorie448313" Association="Self.FKCategorie448313">
+            <End Role="Structure" EntitySet="Structure" />
+            <End Role="Categorie" EntitySet="Categorie" />
+          </AssociationSet>
+          <AssociationSet Name="FKClient242943" Association="Self.FKClient242943">
+            <End Role="Structure" EntitySet="Structure" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FKFacture381456" Association="Self.FKFacture381456">
+            <End Role="Structure" EntitySet="Structure" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FKFacture523783" Association="Self.FKFacture523783">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FKFacture880416" Association="Self.FKFacture880416">
+            <End Role="Etat" EntitySet="Etat" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FKProduit_Fa13279" Association="Self.FKProduit_Fa13279">
+            <End Role="Produit" EntitySet="Produit" />
+            <End Role="Produit_Facture" EntitySet="Produit_Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FKProduit_Fa746613" Association="Self.FKProduit_Fa746613">
+            <End Role="Facture" EntitySet="Facture" />
+            <End Role="Produit_Facture" EntitySet="Produit_Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FKProduit177806" Association="Self.FKProduit177806">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+          <AssociationSet Name="FKProduit186235" Association="Self.FKProduit186235">
+            <End Role="Structure" EntitySet="Structure" />
+            <End Role="Produit" EntitySet="Produit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpeedInvoicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrateur">
+          <Key>
+            <PropertyRef Name="IdAdministrateur" />
+          </Key>
+          <Property Name="IdAdministrateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomUtilisateur" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="IdCategorie" />
+          </Key>
+          <Property Name="IdCategorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomCategorie" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdStructure" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Structure" Relationship="Self.FKCategorie448313" FromRole="Categorie" ToRole="Structure" />
+          <NavigationProperty Name="Produits" Relationship="Self.FKProduit177806" FromRole="Categorie" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomClient" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrenomClient" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdresseClient" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelephoneClient" Type="Int32" Nullable="false" />
+          <Property Name="IdStructure" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Structure" Relationship="Self.FKClient242943" FromRole="Client" ToRole="Structure" />
+          <NavigationProperty Name="Factures" Relationship="Self.FKFacture523783" FromRole="Client" ToRole="Facture" />
+        </EntityType>
+        <EntityType Name="Etat">
+          <Key>
+            <PropertyRef Name="IdEtat" />
+          </Key>
+          <Property Name="IdEtat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomEtat" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DescriptionEtat" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Factures" Relationship="Self.FKFacture880416" FromRole="Etat" ToRole="Facture" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="IdFacture" />
+          </Key>
+          <Property Name="IdFacture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReferenceFacture" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreationFacture" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RemiseFacture" Type="Int32" Nullable="false" />
+          <Property Name="Tva" Type="Single" Nullable="false" />
+          <Property Name="MontantHtFacture" Type="Single" Nullable="false" />
+          <Property Name="MontantTtcFacture" Type="Single" Nullable="false" />
+          <Property Name="IdEtat" Type="Int32" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdStructure" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FKFacture523783" FromRole="Facture" ToRole="Client" />
+          <NavigationProperty Name="Etat" Relationship="Self.FKFacture880416" FromRole="Facture" ToRole="Etat" />
+          <NavigationProperty Name="Structure" Relationship="Self.FKFacture381456" FromRole="Facture" ToRole="Structure" />
+          <NavigationProperty Name="Produit_Facture" Relationship="Self.FKProduit_Fa746613" FromRole="Facture" ToRole="Produit_Facture" />
+        </EntityType>
+        <EntityType Name="Produit">
+          <Key>
+            <PropertyRef Name="IdProduit" />
+          </Key>
+          <Property Name="IdProduit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReferenceProduit" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IntituleProduit" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DescriptionProduit" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrixUnitaireProduit" Type="Int32" Nullable="false" />
+          <Property Name="IdCategorie" Type="Int32" Nullable="false" />
+          <Property Name="IdStructure" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FKProduit177806" FromRole="Produit" ToRole="Categorie" />
+          <NavigationProperty Name="Produit_Facture" Relationship="Self.FKProduit_Fa13279" FromRole="Produit" ToRole="Produit_Facture" />
+          <NavigationProperty Name="Structure" Relationship="Self.FKProduit186235" FromRole="Produit" ToRole="Structure" />
+        </EntityType>
+        <EntityType Name="Produit_Facture">
+          <Key>
+            <PropertyRef Name="IdProduit" />
+            <PropertyRef Name="IdFacture" />
+          </Key>
+          <Property Name="IdProduit" Type="Int32" Nullable="false" />
+          <Property Name="IdFacture" Type="Int32" Nullable="false" />
+          <Property Name="QuantiteProduit" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Facture" Relationship="Self.FKProduit_Fa746613" FromRole="Produit_Facture" ToRole="Facture" />
+          <NavigationProperty Name="Produit" Relationship="Self.FKProduit_Fa13279" FromRole="Produit_Facture" ToRole="Produit" />
+        </EntityType>
+        <EntityType Name="Structure">
+          <Key>
+            <PropertyRef Name="IdStructure" />
+          </Key>
+          <Property Name="IdStructure" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomStructure" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MotDePasse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TelephoneStructure" Type="Int32" Nullable="false" />
+          <Property Name="AdresseStructure" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreationStructure" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LogoStructure" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Categories" Relationship="Self.FKCategorie448313" FromRole="Structure" ToRole="Categorie" />
+          <NavigationProperty Name="Clients" Relationship="Self.FKClient242943" FromRole="Structure" ToRole="Client" />
+          <NavigationProperty Name="Factures" Relationship="Self.FKFacture381456" FromRole="Structure" ToRole="Facture" />
+          <NavigationProperty Name="Produits" Relationship="Self.FKProduit186235" FromRole="Structure" ToRole="Produit" />
+        </EntityType>
+        <Association Name="FKCategorie448313">
+          <End Role="Structure" Type="Self.Structure" Multiplicity="1" />
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structure">
+              <PropertyRef Name="IdStructure" />
+            </Principal>
+            <Dependent Role="Categorie">
+              <PropertyRef Name="IdStructure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProduit177806">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="IdCategorie" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="IdCategorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKClient242943">
+          <End Role="Structure" Type="Self.Structure" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structure">
+              <PropertyRef Name="IdStructure" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IdStructure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKFacture523783">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKFacture880416">
+          <End Role="Etat" Type="Self.Etat" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etat">
+              <PropertyRef Name="IdEtat" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="IdEtat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKFacture381456">
+          <End Role="Structure" Type="Self.Structure" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structure">
+              <PropertyRef Name="IdStructure" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="IdStructure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProduit_Fa746613">
+          <End Role="Facture" Type="Self.Facture" Multiplicity="1" />
+          <End Role="Produit_Facture" Type="Self.Produit_Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facture">
+              <PropertyRef Name="IdFacture" />
+            </Principal>
+            <Dependent Role="Produit_Facture">
+              <PropertyRef Name="IdFacture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProduit_Fa13279">
+          <End Role="Produit" Type="Self.Produit" Multiplicity="1" />
+          <End Role="Produit_Facture" Type="Self.Produit_Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produit">
+              <PropertyRef Name="IdProduit" />
+            </Principal>
+            <Dependent Role="Produit_Facture">
+              <PropertyRef Name="IdProduit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKProduit186235">
+          <End Role="Structure" Type="Self.Structure" Multiplicity="1" />
+          <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Structure">
+              <PropertyRef Name="IdStructure" />
+            </Principal>
+            <Dependent Role="Produit">
+              <PropertyRef Name="IdStructure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpeedInvoicesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrateurs" EntityType="Self.Administrateur" />
+          <EntitySet Name="Categories" EntityType="Self.Categorie" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Etats" EntityType="Self.Etat" />
+          <EntitySet Name="Factures" EntityType="Self.Facture" />
+          <EntitySet Name="Produits" EntityType="Self.Produit" />
+          <EntitySet Name="Produit_Facture" EntityType="Self.Produit_Facture" />
+          <EntitySet Name="Structures" EntityType="Self.Structure" />
+          <AssociationSet Name="FKCategorie448313" Association="Self.FKCategorie448313">
+            <End Role="Structure" EntitySet="Structures" />
+            <End Role="Categorie" EntitySet="Categories" />
+          </AssociationSet>
+          <AssociationSet Name="FKProduit177806" Association="Self.FKProduit177806">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="Produit" EntitySet="Produits" />
+          </AssociationSet>
+          <AssociationSet Name="FKClient242943" Association="Self.FKClient242943">
+            <End Role="Structure" EntitySet="Structures" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FKFacture523783" Association="Self.FKFacture523783">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Facture" EntitySet="Factures" />
+          </AssociationSet>
+          <AssociationSet Name="FKFacture880416" Association="Self.FKFacture880416">
+            <End Role="Etat" EntitySet="Etats" />
+            <End Role="Facture" EntitySet="Factures" />
+          </AssociationSet>
+          <AssociationSet Name="FKFacture381456" Association="Self.FKFacture381456">
+            <End Role="Structure" EntitySet="Structures" />
+            <End Role="Facture" EntitySet="Factures" />
+          </AssociationSet>
+          <AssociationSet Name="FKProduit_Fa746613" Association="Self.FKProduit_Fa746613">
+            <End Role="Facture" EntitySet="Factures" />
+            <End Role="Produit_Facture" EntitySet="Produit_Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FKProduit_Fa13279" Association="Self.FKProduit_Fa13279">
+            <End Role="Produit" EntitySet="Produits" />
+            <End Role="Produit_Facture" EntitySet="Produit_Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FKProduit186235" Association="Self.FKProduit186235">
+            <End Role="Structure" EntitySet="Structures" />
+            <End Role="Produit" EntitySet="Produits" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpeedInvoicesModelStoreContainer" CdmEntityContainer="SpeedInvoicesEntities">
+          <EntitySetMapping Name="Administrateurs">
+            <EntityTypeMapping TypeName="SpeedInvoicesModel.Administrateur">
+              <MappingFragment StoreEntitySet="Administrateur">
+                <ScalarProperty Name="IdAdministrateur" ColumnName="IdAdministrateur" />
+                <ScalarProperty Name="NomUtilisateur" ColumnName="NomUtilisateur" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="SpeedInvoicesModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+                <ScalarProperty Name="NomCategorie" ColumnName="NomCategorie" />
+                <ScalarProperty Name="IdStructure" ColumnName="IdStructure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="SpeedInvoicesModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="NomClient" ColumnName="NomClient" />
+                <ScalarProperty Name="PrenomClient" ColumnName="PrenomClient" />
+                <ScalarProperty Name="AdresseClient" ColumnName="AdresseClient" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="TelephoneClient" ColumnName="TelephoneClient" />
+                <ScalarProperty Name="IdStructure" ColumnName="IdStructure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etats">
+            <EntityTypeMapping TypeName="SpeedInvoicesModel.Etat">
+              <MappingFragment StoreEntitySet="Etat">
+                <ScalarProperty Name="IdEtat" ColumnName="IdEtat" />
+                <ScalarProperty Name="NomEtat" ColumnName="NomEtat" />
+                <ScalarProperty Name="DescriptionEtat" ColumnName="DescriptionEtat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Factures">
+            <EntityTypeMapping TypeName="SpeedInvoicesModel.Facture">
+              <MappingFragment StoreEntitySet="Facture">
+                <ScalarProperty Name="IdFacture" ColumnName="IdFacture" />
+                <ScalarProperty Name="ReferenceFacture" ColumnName="ReferenceFacture" />
+                <ScalarProperty Name="DateCreationFacture" ColumnName="DateCreationFacture" />
+                <ScalarProperty Name="RemiseFacture" ColumnName="RemiseFacture" />
+                <ScalarProperty Name="Tva" ColumnName="Tva" />
+                <ScalarProperty Name="MontantHtFacture" ColumnName="MontantHtFacture" />
+                <ScalarProperty Name="MontantTtcFacture" ColumnName="MontantTtcFacture" />
+                <ScalarProperty Name="IdEtat" ColumnName="IdEtat" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdStructure" ColumnName="IdStructure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produits">
+            <EntityTypeMapping TypeName="SpeedInvoicesModel.Produit">
+              <MappingFragment StoreEntitySet="Produit">
+                <ScalarProperty Name="IdProduit" ColumnName="IdProduit" />
+                <ScalarProperty Name="ReferenceProduit" ColumnName="ReferenceProduit" />
+                <ScalarProperty Name="IntituleProduit" ColumnName="IntituleProduit" />
+                <ScalarProperty Name="DescriptionProduit" ColumnName="DescriptionProduit" />
+                <ScalarProperty Name="PrixUnitaireProduit" ColumnName="PrixUnitaireProduit" />
+                <ScalarProperty Name="IdCategorie" ColumnName="IdCategorie" />
+                <ScalarProperty Name="IdStructure" ColumnName="IdStructure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produit_Facture">
+            <EntityTypeMapping TypeName="SpeedInvoicesModel.Produit_Facture">
+              <MappingFragment StoreEntitySet="Produit_Facture">
+                <ScalarProperty Name="IdProduit" ColumnName="IdProduit" />
+                <ScalarProperty Name="IdFacture" ColumnName="IdFacture" />
+                <ScalarProperty Name="QuantiteProduit" ColumnName="QuantiteProduit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Structures">
+            <EntityTypeMapping TypeName="SpeedInvoicesModel.Structure">
+              <MappingFragment StoreEntitySet="Structure">
+                <ScalarProperty Name="IdStructure" ColumnName="IdStructure" />
+                <ScalarProperty Name="NomStructure" ColumnName="NomStructure" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MotDePasse" ColumnName="MotDePasse" />
+                <ScalarProperty Name="TelephoneStructure" ColumnName="TelephoneStructure" />
+                <ScalarProperty Name="AdresseStructure" ColumnName="AdresseStructure" />
+                <ScalarProperty Name="DateCreationStructure" ColumnName="DateCreationStructure" />
+                <ScalarProperty Name="LogoStructure" ColumnName="LogoStructure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedInvoices.Web", "SpeedInvoices.Web\SpeedInvoices.Web.csproj", "{1E56834A-33FE-4E38-A30F-26F3C3DA71B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedInvoices.Service", "SpeedInvoices.Service\SpeedInvoices.Service.csproj", "{B1320F38-C756-4CBC-ABDF-639254260F41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E56834A-33FE-4E38-A30F-26F3C3DA71B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E56834A-33FE-4E38-A30F-26F3C3DA71B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E56834A-33FE-4E38-A30F-26F3C3DA71B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E56834A-33FE-4E38-A30F-26F3C3DA71B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1320F38-C756-4CBC-ABDF-639254260F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1320F38-C756-4CBC-ABDF-639254260F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1320F38-C756-4CBC-ABDF-639254260F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1320F38-C756-4CBC-ABDF-639254260F41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B862F640-F9DF-49CA-8740-209B5E7B6D2E}
+	EndGlobalSection
+EndGlobal

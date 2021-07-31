@@ -1,0 +1,61 @@
+﻿@model SpeedInvoices.Web.Models.StructureModel
+
+@{
+    ViewBag.Title = "Parametre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row column1" style="display:block">
+    <a href="@Url.Action("Editer", "Gestion", new { id = Session["id"].ToString() })" class="btn btn-primary">Editer les informations de votre structure</a>
+    <label class="label_field hidden">label cacher</label>
+    <label class="label_field hidden">label cacher</label>
+
+    @using (Html.BeginForm("Changer", "Gestion", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="form-horizontal">
+            <h3>Voulez-vous changer de mot de passe ?</h3>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class = "control-label col-md-2">Ancien mot de passe</label>
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.MotDePasse, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MotDePasse, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class = "control-label col-md-2">Nouveau mot de passe</label>
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.NMotDePasse, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NMotDePasse, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class = "control-label col-md-2">Confirmer mot de passe</label>
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.NCMotDePasse, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.NCMotDePasse, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

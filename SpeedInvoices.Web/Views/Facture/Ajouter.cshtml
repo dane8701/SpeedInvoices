@@ -1,0 +1,76 @@
+﻿@model SpeedInvoices.Web.Models.CommandeModel
+@{
+    ViewBag.Title = "Ajouter des produits pour la facture";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row colum1" style="display:block">
+        <h3>LISTE DES PRODUITS</h3>
+
+    <div class="row colum1" style="margin-left:0px">
+        @using (Html.BeginForm("AjouterProduit", "Facture", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.DropDownListFor(model => model.IdProduit, Model.Produits, "Choisis un produit", new { @class = "form-control" })
+            <br />
+            @Html.EditorFor(model => model.Quantite, new { htmlAttributes = new { @class = "form-control" } })
+            <br />
+            <input type="submit" value="Ajouter" class="btn btn-primary" />
+        }
+        <br/>
+    </div>
+</div>
+<div class="row colum2" style="margin-top:5px; margin-bottom:10px">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Intitule
+            </th>
+            <th>
+                Quantite
+            </th>
+            <th>
+                Prix unitaire
+            </th>
+            <th>
+                Total
+            </th>
+            <th></th>
+        </tr>
+
+        @if(Model.Paniers != null)
+        {
+            foreach (var item in Model.Paniers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produit.IntituleProduit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantiteProduit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produit.PrixUnitaireProduit)
+                    </td>
+                    <td>
+                        @{ var r = @item.Produit.PrixUnitaireProduit * @item.QuantiteProduit; }
+                        @r
+                    </td>
+                    <td>
+                        <a href="@Url.Action("DeleteProduit", "Facture", new { id = item.IdProduit })" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    @Html.ActionLink("Valider", "Valider", "Facture", new { @class = "btn btn-success" })
+</div>

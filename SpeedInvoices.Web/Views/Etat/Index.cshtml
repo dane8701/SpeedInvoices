@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SpeedInvoices.Web.Models.EtatModel>
+
+@{
+    ViewBag.Title = "LISTE DES ETATS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row colum1">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomEtat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionEtat)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomEtat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionEtat)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.IdEtat })" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"></i>
+                    </a> |
+                    <a href="@Url.Action("Delete", new { id = item.IdEtat })" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

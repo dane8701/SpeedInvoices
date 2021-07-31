@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SpeedInvoices.Web.Models.ClientModel>
+
+@{
+    ViewBag.Title = "LISTE DES CLIENTS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row colum1">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrenomClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdresseClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MotDePasse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelephoneClient)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomClient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrenomClient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdresseClient)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MotDePasse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelephoneClient)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = item.IdClient })" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"></i>
+                    </a> |
+                    <a href="@Url.Action("Delete", new { id = item.IdClient })" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

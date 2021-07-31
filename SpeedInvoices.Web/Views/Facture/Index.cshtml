@@ -1,0 +1,65 @@
+﻿@model IEnumerable<SpeedInvoices.Web.Models.FactureModel>
+
+@{
+    ViewBag.Title = "Liste de facture soldée";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferenceFacture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreationFacture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MontantTtcFacture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Etat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Client)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReferenceFacture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreationFacture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MontantTtcFacture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Etat.NomEtat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.NomClient)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", new { id = item.IdFacture })" class="btn btn-primary">
+                <i class="bi bi-eye-fill"></i>
+            </a> |
+            <a href="@Url.Action("Delete", new { id = item.IdFacture })" class="btn btn-danger">
+                <i class="bi bi-trash"></i>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SpeedInvoices.Web.Models.ProduitModel>
+
+@{
+    ViewBag.Title = "LISTE DES PRODUITS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row column_title">
+    <div class="col-md-12">
+        <div class="page_title">
+            <h2>@ViewBag.Title</h2>
+        </div>
+    </div>
+</div>
+
+<div class="row column1">
+    <table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReferenceProduit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IntituleProduit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescriptionProduit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrixUnitaireProduit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categorie)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferenceProduit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IntituleProduit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionProduit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrixUnitaireProduit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categorie.NomCategorie)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "Produit", new { id = item.IdProduit })" class="btn btn-primary">
+                    <i class="bi bi-pencil-square"></i>
+                </a> |
+                <a href="@Url.Action("Delete", "Produit", new { id = item.IdProduit })" class="btn btn-danger">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+</div>

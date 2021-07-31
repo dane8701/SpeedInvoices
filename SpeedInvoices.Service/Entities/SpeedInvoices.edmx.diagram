@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="79379f2d386243ec8a9cca3e0da1ca94" Name="Diagram1">
+        <EntityTypeShape EntityType="SpeedInvoicesModel.Administrateur" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpeedInvoicesModel.Categorie" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpeedInvoicesModel.Client" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpeedInvoicesModel.Etat" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpeedInvoicesModel.Facture" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpeedInvoicesModel.Produit" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpeedInvoicesModel.Produit_Facture" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpeedInvoicesModel.Structure" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKCategorie448313" ManuallyRouted="false" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKProduit177806" ManuallyRouted="false" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKClient242943" ManuallyRouted="false" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKFacture523783" ManuallyRouted="false" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKFacture880416" ManuallyRouted="false" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKFacture381456" ManuallyRouted="false" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKProduit_Fa746613" ManuallyRouted="false" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKProduit_Fa13279" ManuallyRouted="false" />
+        <AssociationConnector Association="SpeedInvoicesModel.FKProduit186235" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

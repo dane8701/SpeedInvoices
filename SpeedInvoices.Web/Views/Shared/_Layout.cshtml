@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Speed Invoices</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- site icon -->
+    <link rel="icon" href="@Url.Content("~/Content/images/fevicon.png")" type="image/png" />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" />
+    <!-- site css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/style1.css")" />
+    <!-- responsive css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/responsive.css")" />
+    <!-- color css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/colors.css")" />
+    <!-- select bootstrap -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-select.css")" />
+    <!-- scrollbar css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/perfect-scrollbar.css")" />
+    <!-- custom css -->
+    <link rel="stylesheet" href="@Url.Content("~/Content/custom.css")" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="dashboard dashboard_1">
+    <div class="full_container">
+        <div class="inner_container">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div class="sidebar_blog_1">
+                    <div class="sidebar_user_info">
+                        <div class="icon_setting"></div>
+                        <div class="user_profle_side">
+                            <div class="user_img"><img class="img-responsive" src="@Session["LogoStructure"].ToString()" alt="#" /></div>
+                            <div class="user_info">
+                                <h6>@Session["nom"].ToString()</h6>
+                                <p><span class="online_animation"></span> Online</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar_blog_2">
+                    <h4>General</h4>
+                    <ul class="list-unstyled components">
+                        <li class="active">
+                            <a href="@Url.Action("Index", "Gestion", "Gestion")"><i class="fa fa-dashboard yellow_color"></i> <span>Tableau de bord</span></a>
+                        </li>
+
+                        <li>
+                            <a href="#facture" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="bi bi-receipt blue2_color"></i> <span>Facture</span></a>
+                            <ul class="collapse list-unstyled" id="facture">
+                                <li><a href="@Url.Action("Ajouter", "Facture", "Facture")">> <span>Ajouter</span></a></li>
+                                <li><a href="@Url.Action("FactureNS", "Facture", "Facture")">> <span>Lister facture non soldée</span></a></li>
+                                <li><a href="@Url.Action("Index", "Facture", "Facture")">> <span>Lister facture soldée</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#client" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="bi bi-person-circle red_color"></i><span>Client</span></a>
+                            <ul class="collapse list-unstyled" id="client">
+                                <li><a href="@Url.Action("Create", "Client", "Client")">> <span>Ajouter</span></a></li>
+                                <li><a href="@Url.Action("Index", "Client", "Client")">> <span>Lister</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#produit" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-diamond purple_color"></i> <span>Produit</span></a>
+                            <ul class="collapse list-unstyled" id="produit">
+                                <li><a href="@Url.Action("Create", "Produit", "Produit")">> <span>Ajouter</span></a></li>
+                                <li><a href="@Url.Action("Index", "Produit", "Produit")">> <span>Lister</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#categorie" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="bi bi-tags-fill green_color"></i><span>Categorie</span></a>
+                            <ul class="collapse list-unstyled" id="categorie">
+                                <li><a href="@Url.Action("Create", "Categorie", "Categorie")">> <span>Ajouter</span></a></li>
+                                <li><a href="@Url.Action("Index", "Categorie", "Categorie")">> <span>Lister</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#etat" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="bi bi-stack"></i><span>Etat</span></a>
+                            <ul class="collapse list-unstyled" id="etat">
+                                <li><a href="@Url.Action("Create", "Etat", "Etat")">> <span>Ajouter</span></a></li>
+                                <li><a href="@Url.Action("Index", "Etat", "Etat")">> <span>Lister</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="@Url.Action("Parametre", "Gestion", "Gestion")"><i class="fa fa-cog yellow_color"></i> <span>Parametre</span></a></li>
+                    </ul>
+                </div>
+            </nav>
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+                <!-- topbar -->
+                <div class="topbar">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <div class="full">
+                            <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                            <div class="logo_section">
+                                <a href="index.html"><img class="img-responsive" src="@Url.Content("~/Content/images/logo/logo.png")" alt="#" /></a>
+                            </div>
+                            <div class="right_topbar">
+                                <div class="icon_info">
+                                    <ul class="user_profile_dd">
+                                        <li>
+                                            <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="@Session["LogoStructure"].ToString()" alt="#" /><span class="name_user">@Session["nom"].ToString()</span></a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="@Url.Action("About", "Structure", "Structure")">Aide</a>
+                                                <a class="dropdown-item" href="@Url.Action("Logout", "Structure", "Structure")"><span>Deconnexion</span> <i class="fa fa-sign-out"></i></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <!-- end topbar -->
+                <!-- dashboard inner -->
+                <div class="midde_cont">
+                    <div class="container-fluid">
+                        @RenderBody()
+                    </div>
+                </div>
+                <!-- end dashboard inner -->
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/popper.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <!-- wow animation -->
+    <script src="@Url.Content("~/Scripts/animate.js")"></script>
+    <!-- select country -->
+    <script src="@Url.Content("~/Scripts/bootstrap-select.js")"></script>
+    <!-- owl carousel -->
+    <script src="@Url.Content("~/Scripts/owl.carousel.js")"></script>
+    <!-- chart js -->
+    <script src="@Url.Content("~/Scripts/Chart.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Chart.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/utils.js")"></script>
+    <script src="@Url.Content("~/Scripts/analyser.js")"></script>
+    <!-- nice scrollbar -->
+    <script src="@Url.Content("~/Scripts/perfect-scrollbar.min.js")"></script>
+    <script>
+        var ps = new PerfectScrollbar('#sidebar');
+    </script>
+    <!-- custom js -->
+    <script src="@Url.Content("~/Scripts/chart_custom_style1.js")"></script>
+    <script src="@Url.Content("~/Scripts/custom.js")"></script>
+</body>
+</html>
