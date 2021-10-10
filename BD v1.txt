@@ -1,0 +1,72 @@
+CREATE TABLE Administrateur (
+  IdAdministrateur int IDENTITY NOT NULL, 
+  NomUtilisateur   varchar(255) NOT NULL, 
+  Email            varchar(255) NOT NULL, 
+  MotDePasse       varchar(255) NOT NULL, 
+  PRIMARY KEY (IdAdministrateur));
+CREATE TABLE Categorie (
+  IdCategorie  int IDENTITY(1, 1) NOT NULL, 
+  NomCategorie varchar(255) NOT NULL, 
+  IdStructure  int NOT NULL, 
+  PRIMARY KEY (IdCategorie));
+CREATE TABLE Client (
+  IdClient        int IDENTITY NOT NULL, 
+  NomClient       varchar(255) NOT NULL, 
+  PrenomClient    varchar(255) NOT NULL, 
+  AdresseClient   varchar(255) NOT NULL, 
+  Email           varchar(255) NOT NULL, 
+  MotDePasse      varchar(255) NOT NULL, 
+  TelephoneClient int NOT NULL, 
+  IdStructure     int NOT NULL, 
+  PRIMARY KEY (IdClient));
+CREATE TABLE Etat (
+  IdEtat          int IDENTITY(1, 1) NOT NULL, 
+  NomEtat         varchar(255) NOT NULL UNIQUE, 
+  DescriptionEtat varchar(255) NOT NULL, 
+  PRIMARY KEY (IdEtat));
+CREATE TABLE Facture (
+  IdFacture           int IDENTITY(1, 1) NOT NULL, 
+  ReferenceFacture    varchar(255) NOT NULL, 
+  DateCreationFacture date NOT NULL, 
+  RemiseFacture       int NOT NULL, 
+  Tva                 float(10) NOT NULL, 
+  MontantHtFacture    float(10) NOT NULL, 
+  MontantTtcFacture   float(10) NOT NULL, 
+  IdEtat              int NOT NULL, 
+  IdClient            int NOT NULL, 
+  IdStructure         int NOT NULL, 
+  PRIMARY KEY (IdFacture));
+CREATE TABLE Produit (
+  IdProduit           int IDENTITY(1, 1) NOT NULL, 
+  ReferenceProduit    varchar(255) NOT NULL UNIQUE, 
+  IntituleProduit     varchar(255) NOT NULL, 
+  DescriptionProduit  varchar(255) NOT NULL, 
+  PrixUnitaireProduit int NOT NULL, 
+  IdCategorie         int NOT NULL, 
+  IdStructure         int NOT NULL, 
+  PRIMARY KEY (IdProduit));
+CREATE TABLE Produit_Facture (
+  IdProduit       int NOT NULL, 
+  IdFacture       int NOT NULL, 
+  QuantiteProduit int NOT NULL, 
+  PRIMARY KEY (IdProduit, 
+  IdFacture));
+CREATE TABLE Structure (
+  IdStructure           int IDENTITY NOT NULL, 
+  NomStructure          varchar(255) NOT NULL, 
+  Email                 varchar(255) NOT NULL, 
+  MotDePasse            varchar(255) NOT NULL, 
+  TelephoneStructure    int NOT NULL, 
+  AdresseStructure      varchar(255) NOT NULL, 
+  DateCreationStructure date NOT NULL, 
+  LogoStructure         varchar(255) NOT NULL, 
+  PRIMARY KEY (IdStructure));
+ALTER TABLE Client ADD CONSTRAINT FKClient242943 FOREIGN KEY (IdStructure) REFERENCES Structure (IdStructure);
+ALTER TABLE Facture ADD CONSTRAINT FKFacture523783 FOREIGN KEY (IdClient) REFERENCES Client (IdClient);
+ALTER TABLE Produit ADD CONSTRAINT FKProduit186235 FOREIGN KEY (IdStructure) REFERENCES Structure (IdStructure);
+ALTER TABLE Produit ADD CONSTRAINT FKProduit177806 FOREIGN KEY (IdCategorie) REFERENCES Categorie (IdCategorie);
+ALTER TABLE Produit_Facture ADD CONSTRAINT FKProduit_Fa13279 FOREIGN KEY (IdProduit) REFERENCES Produit (IdProduit);
+ALTER TABLE Categorie ADD CONSTRAINT FKCategorie448313 FOREIGN KEY (IdStructure) REFERENCES Structure (IdStructure);
+ALTER TABLE Facture ADD CONSTRAINT FKFacture381456 FOREIGN KEY (IdStructure) REFERENCES Structure (IdStructure);
+ALTER TABLE Facture ADD CONSTRAINT FKFacture880416 FOREIGN KEY (IdEtat) REFERENCES Etat (IdEtat);
+ALTER TABLE Produit_Facture ADD CONSTRAINT FKProduit_Fa746613 FOREIGN KEY (IdFacture) REFERENCES Facture (IdFacture);
